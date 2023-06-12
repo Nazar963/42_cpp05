@@ -1,11 +1,11 @@
 CC = c++ -Wall -Wextra -Werror -std=c++98
-CFILES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp
+CFILES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 MAIN = Form
 
 all: $(MAIN)
 
 $(MAIN):
-	$(CC) -g $(CFILES) Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp -o $(MAIN)
+	$(CC) -g $(CFILES) Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp -o $(MAIN)
 
 clean:
 	rm $(MAIN)

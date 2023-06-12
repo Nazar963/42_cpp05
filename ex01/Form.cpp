@@ -1,6 +1,23 @@
 #include "Form.hpp"
 
-Form::Form(std::string name, int gradeSign, int gradeExecute) : _name(name), _gradeSign(gradeSign), _gradeExecute(gradeExecute), _isSigned(false) {}
+Form::Form(std::string name, int gradeSign, int gradeExecute) : _name(name), _gradeSign(gradeSign), _gradeExecute(gradeExecute), _isSigned(false) 
+{
+	try
+	{
+		if (gradeSign < 1 || gradeExecute < 1)
+			throw Form::GradeTooHighException();
+		else if (gradeSign > 150 || gradeExecute > 150)
+			throw Form::GradeTooLowException();
+	}
+	catch (Form::GradeTooHighException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch (Form::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
 
 std::string Form::getName() const { return (_name); }
 
@@ -14,22 +31,15 @@ void	Form::beSigned(Bureaucrat& b)
 {
 	try
 	{
-		if (b.getGrade() == _gradeSign)
+		if (b.getGrade() <= _gradeSign)
 			_isSigned = true;
-		else if (b.getGrade() < _gradeSign)
-			throw Form::GradeTooHighException();
 		else if (b.getGrade() > _gradeSign)
 			throw Form::GradeTooLowException();
-	}
-	catch (Form::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
 	}
 	catch (Form::GradeTooLowException& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-
 }
 
 Form::~Form() {}

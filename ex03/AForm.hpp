@@ -40,7 +40,7 @@ class AForm
 		virtual void	execute(Bureaucrat const & executor) const = 0;
 
 		void	beSigned(Bureaucrat& b);
-		~AForm();
+		virtual  ~AForm();
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& f);

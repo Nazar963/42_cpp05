@@ -1,25 +1,25 @@
-#ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
+#include <iostream>
 #include "AForm.hpp"
-#include <fstream>
 
-class ShrubberyCreationForm : public AForm
+class PresidentialPardonForm : public AForm
 {
 	private:
 		std::string	_name;
 	public:
-		ShrubberyCreationForm(std::string name);
 		class GradeTooLowException: public std::exception
 		{
 			public:
 				const char* what() const throw()
 				{
-					return ("tree Grade too low");
+					return ("Grade too low");
 				}
 		};
+		PresidentialPardonForm(std::string target);
 		void	execute(Bureaucrat const & executor) const;
-		~ShrubberyCreationForm();
+		~PresidentialPardonForm();
 };
 
 #endif

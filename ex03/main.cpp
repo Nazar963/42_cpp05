@@ -3,6 +3,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int	main(void)
 {
@@ -30,4 +31,13 @@ int	main(void)
 	loco.incGrade(15);
 	std::cout << loco << std::endl;
 	levi.execute(loco);
+	Intern someRandomIntern;
+	AForm* erwen;
+	erwen = someRandomIntern.makeForm("PresidentialPardonForm", "Bender");
+	if (erwen)
+	{
+		loco.signForm(*erwen);
+		erwen->execute(loco);
+		delete erwen;
+	}
 }

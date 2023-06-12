@@ -56,18 +56,24 @@ void	Bureaucrat::decGrade(int num)
 	}
 }
 
-void	Bureaucrat::signForm(Form& e)
+void	Bureaucrat::signForm(Form& boh)
 {
-	if (e.getSigned())
-		std::cout << _name << " signed " << e.getName() << std::endl;
-	else
+	try
 	{
-		if (Bureaucrat::getGrade() < e.getGradeSigned())
-			std::cout << _name << " signed " << e.getName() << "grade required too high" << std::endl;
-		else if (Bureaucrat::getGrade() > e.getGradeSigned())
-			std::cout << _name << " signed " << e.getName() << "grade required too high" << std::endl;
+		if (boh.getSigned())
+			std::cout << _name << " signed " << boh.getName() << std::endl;
+		else
+		{
+			if (_grade < boh.getGradeSigned())
+				throw Bureaucrat::GradeTooHighException();
+			else if (_grade > boh.getGradeSigned())
+				throw Bureaucrat::GradeTooLowException();
+		}
 	}
-
+	catch (Bureaucrat::GradeTooHighException& e)
+	{
+		std::cout << _name << " couldn't sign " << boh.getName() << "because" << e.what() << std::endl;
+	}
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& f)
