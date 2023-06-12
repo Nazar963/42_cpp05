@@ -1,6 +1,6 @@
-#include "ShrubberyCreationForm.hpp"
+	#include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, int gradeSign, int gradeExecute) : _req_sign(145) , _exec_sign(137) , _name(name) , AForm(name, gradeSign, gradeExecute) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name) : AForm(name, 10, 10), _req_sign(145), _exec_sign(137) , _name(name) {}
 
 void	ShrubberyCreationForm::check(int req, int exec)
 {
@@ -10,7 +10,7 @@ void	ShrubberyCreationForm::check(int req, int exec)
 		{
 			std::ofstream fd;
 			std::string full = _name + "_shrubbery";
-			fd.open(full);
+			fd.open(full.c_str());
 			fd << "	                                               .      " << std::endl;
             fd << "                                     .         ;       " << std::endl;
             fd << "        .              .              ;%     ;;        " << std::endl;
@@ -39,6 +39,7 @@ void	ShrubberyCreationForm::check(int req, int exec)
             fd << "                      ;%@@@@%::;.                      " << std::endl;
             fd << "                     ;%@@@@%%:;;;.                     " << std::endl;
             fd << "                 ...;%@@@@@%%:;;;;,..                  " << std::endl;
+			fd.close();
 		}
 		else if (req > _req_sign || exec > _exec_sign)
 			throw ShrubberyCreationForm::GradeTooHighException();

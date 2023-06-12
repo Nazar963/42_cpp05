@@ -1,11 +1,13 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int	main(void)
 {
 	Bureaucrat	loco("loco", 10);
-	ShrubberyCreationForm	zoro("zoro", 20, 0);
+	ShrubberyCreationForm	zoro("zoro");
+	RobotomyRequestForm		eren("eren");
 
 	std::cout << loco << std::endl;
 	loco.incGrade(10);
@@ -21,4 +23,6 @@ int	main(void)
 	zoro.beSigned(loco);
 	std::cout << zoro << std::endl;
 	loco.signForm(zoro);
+	zoro.check(zoro.getGradeSigned(), zoro.getGradeExecute());
+	zoro.
 }

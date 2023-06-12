@@ -63,9 +63,9 @@ void	Bureaucrat::signForm(AForm& e)
 	else
 	{
 		if (Bureaucrat::getGrade() < e.getGradeSigned())
-			std::cout << _name << " signed " << e.getName() << "grade required too high" << std::endl;
+			std::cout << _name << " signed " << e.getName() << " grade required too high" << std::endl;
 		else if (Bureaucrat::getGrade() > e.getGradeSigned())
-			std::cout << _name << " signed " << e.getName() << "grade required too high" << std::endl;
+			std::cout << _name << " signed " << e.getName() << " grade required too high" << std::endl;
 	}
 
 }

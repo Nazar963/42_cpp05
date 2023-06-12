@@ -1,23 +1,30 @@
-#ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
-#include <fstream>
 
-class ShrubberyCreationForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 	private:
 		const int	_req_sign;
 		const int	_exec_sign;
 		std::string	_name;
 	public:
-		ShrubberyCreationForm(std::string name);
+		RobotomyRequestForm(std::string name);
+		class HighException: public std::exception
+		{
+			public:
+				const char* what() const throw()
+				{
+					return ("robotomy failed");
+				}
+		};
 		class GradeTooHighException: public std::exception
 		{
 			public:
 				const char* what() const throw()
 				{
-					return ("tree Grade too high");
+					return ("robotomy grade too high");
 				}
 		};
 		class GradeTooLowException: public std::exception
@@ -25,12 +32,12 @@ class ShrubberyCreationForm : public AForm
 			public:
 				const char* what() const throw()
 				{
-					return ("tree Grade too low");
+					return ("robotomy grade too low");
 				}
 		};
 		void	check(int req, int exec);
 		void	loco();
-		~ShrubberyCreationForm();
+		~RobotomyRequestForm();
 };
 
 #endif
