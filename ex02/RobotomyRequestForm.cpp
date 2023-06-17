@@ -11,7 +11,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	{
 		if (executor.getGrade() <= getGradeExecute())
 		{
-			srand(time(NULL)); 
+			srand(time(NULL));
 			int	random_num = rand();
 			std::cout << "drilling noises " << std::endl;
 			if (random_num < RAND_MAX / 2)

@@ -45,7 +45,7 @@ void	Bureaucrat::decGrade(int num)
 {
 	try
 	{
-		if (_grade + num > 150)
+		if ((_grade + num) > 150)
 			throw Bureaucrat::GradeTooLowException();
 		else
 			_grade += num;
