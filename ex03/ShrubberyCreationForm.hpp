@@ -8,17 +8,14 @@ class ShrubberyCreationForm : public AForm
 {
 	private:
 		std::string	_name;
+		ShrubberyCreationForm();
 	public:
 		ShrubberyCreationForm(std::string name);
-		class GradeTooLowException: public std::exception
-		{
-			public:
-				const char* what() const throw()
-				{
-					return ("tree Grade too low");
-				}
-		};
+		ShrubberyCreationForm(const ShrubberyCreationForm& copy);
+		ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& other);
+
 		void	execute(Bureaucrat const & executor) const;
+
 		~ShrubberyCreationForm();
 };
 

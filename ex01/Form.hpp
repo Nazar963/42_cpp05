@@ -16,13 +16,14 @@ class Form
 		const int _gradeExecute;
 		bool	_isSigned;
 	public:
+		Form();
 		Form(std::string name, int gradeSign, int gradeExecute);
 		class GradeTooHighException : public std::exception
 		{
 			public:
 				const char* what() const throw()
 				{
-					return ("Form grade too high");
+					return ("grade too high");
 				}
 		};
 		class GradeTooLowException : public std::exception
@@ -30,7 +31,7 @@ class Form
 			public:
 				const char* what() const throw()
 				{
-					return ("Form grade too low");
+					return ("grade too low");
 				}
 		};
 		std::string	getName() const;

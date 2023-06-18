@@ -60,20 +60,14 @@ void	Bureaucrat::signForm(Form& boh)
 {
 	try
 	{
-		if (boh.getSigned())
-			std::cout << _name << " signed " << boh.getName() << std::endl;
-		else
-		{
-			if (_grade < boh.getGradeSigned())
-				throw Bureaucrat::GradeTooHighException();
-			else if (_grade > boh.getGradeSigned())
-				throw Bureaucrat::GradeTooLowException();
-		}
+		boh.beSigned(*this);
 	}
-	catch (Bureaucrat::GradeTooHighException& e)
+	catch (Form::GradeTooLowException& e)
 	{
-		std::cout << _name << " couldn't sign " << boh.getName() << "because" << e.what() << std::endl;
+		std::cout << _name << " couldn't sign " << boh.getName() << " because " << e.what() << std::endl;
+		return ;
 	}
+	std::cout << _name << " signed " << boh.getName() << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& f)

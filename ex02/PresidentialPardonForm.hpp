@@ -8,17 +8,14 @@ class PresidentialPardonForm : public AForm
 {
 	private:
 		std::string	_name;
+		PresidentialPardonForm();
 	public:
-		class GradeTooLowException: public std::exception
-		{
-			public:
-				const char* what() const throw()
-				{
-					return ("Grade too low");
-				}
-		};
 		PresidentialPardonForm(std::string target);
+		PresidentialPardonForm(const PresidentialPardonForm& copy);
+		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
+
 		void	execute(Bureaucrat const & executor) const;
+
 		~PresidentialPardonForm();
 };
 

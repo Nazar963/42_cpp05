@@ -19,25 +19,76 @@ int	main(void)
 	std::cout << loco << std::endl;
 	loco.incGrade(10);
 	std::cout << loco << std::endl;
-	zoro.beSigned(loco);
-	std::cout << zoro << std::endl;
-	loco.decGrade(10);
-	std::cout << loco << std::endl;
-	zoro.beSigned(loco);
-	std::cout << zoro << std::endl;
-	loco.signForm(zoro);
-	zoro.execute(loco);
-	eren.execute(loco);
-	loco.incGrade(15);
-	std::cout << loco << std::endl;
-	levi.execute(loco);
-	Intern someRandomIntern;
-	AForm* erwen;
-	erwen = someRandomIntern.makeForm("PresidentialPardonForm", "Bender");
-	if (erwen)
+
+	try
 	{
-		loco.signForm(*erwen);
-		erwen->execute(loco);
-		delete erwen;
+		zoro.beSigned(loco);
+	}
+	catch (AForm::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << zoro << std::endl;
+	loco.decGrade(20);
+	std::cout << loco << std::endl;
+	try
+	{
+		zoro.beSigned(loco);
+	}
+	catch (AForm::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << zoro << std::endl;
+	try
+	{
+		loco.signForm(zoro);
+		loco.signForm(eren);
+		loco.signForm(levi);
+	}
+	catch (Bureaucrat::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch (Bureaucrat::GradeTooHighException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	try
+	{
+		zoro.execute(loco);
+		eren.execute(loco);
+		loco.incGrade(15);
+		std::cout << loco << std::endl;
+		levi.execute(loco);
+	}
+	catch (AForm::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch (AForm::FormNotSigned& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	try
+	{
+		Intern dog;
+		AForm* erwen;
+		erwen = dog.makeForm("PresidentialPardonForm", "Bender");
+		if (erwen)
+		{
+			erwen->beSigned(loco);
+			loco.executeForm(*erwen);
+		}
+	}
+	catch (AForm::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	catch (AForm::FormNotSigned& e)
+	{
+		std::cout << e.what() << std::endl;
 	}
 }

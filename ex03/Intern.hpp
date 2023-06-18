@@ -13,7 +13,11 @@ class Intern
 		std::string	_name;
 	public:
 		Intern();
+		Intern(const Intern& copy);
+		Intern&	operator=(const Intern& other);
+
 		AForm*	makeForm(std::string name, std::string target);
+
 		~Intern();
 };
 

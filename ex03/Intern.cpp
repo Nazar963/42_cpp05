@@ -2,6 +2,18 @@
 
 Intern::Intern() {}
 
+Intern::Intern(const Intern& copy)
+{
+	_name = copy._name;
+}
+
+Intern& Intern::operator=(const Intern& other)
+{
+	if (this != &other)
+		_name = other._name;
+	return (*this);
+}
+
 AForm* createPresidentialPardonForm(std::string target)
 {
 	return (new PresidentialPardonForm(target));

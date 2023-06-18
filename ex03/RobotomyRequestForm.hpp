@@ -7,25 +7,14 @@ class RobotomyRequestForm : public AForm
 {
 	private:
 		std::string	_name;
+		RobotomyRequestForm();
 	public:
 		RobotomyRequestForm(std::string name);
-		class HighException: public std::exception
-		{
-			public:
-				const char* what() const throw()
-				{
-					return (" robotomy failed");
-				}
-		};
-		class GradeTooLowException: public std::exception
-		{
-			public:
-				const char* what() const throw()
-				{
-					return ("robotomy grade too low");
-				}
-		};
+		RobotomyRequestForm(const RobotomyRequestForm& copy);
+		RobotomyRequestForm&	operator=(const RobotomyRequestForm& other);
+
 		void	execute(Bureaucrat const & executor) const;
+
 		~RobotomyRequestForm();
 };
 

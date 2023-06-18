@@ -5,33 +5,43 @@
 
 RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm("RobotomyRequestForm", 72, 45), _name(name) {}
 
-void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& copy) : AForm(copy)
 {
-	try
-	{
-		if (executor.getGrade() <= getGradeExecute())
-		{
-			srand(time(NULL));
-			int	random_num = rand();
-			std::cout << "drilling noises " << std::endl;
-			if (random_num < RAND_MAX / 2)
-				std::cout << _name << " has been robotomized successfully" << std::endl;
-			else
-				throw RobotomyRequestForm::HighException();
-		}
-		else
-			throw RobotomyRequestForm::GradeTooLowException();
-	}
-	catch (RobotomyRequestForm::HighException& e)
-	{
-		std::cout << _name << e.what() << std::endl;
-	}
-	catch (RobotomyRequestForm::GradeTooLowException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	_name = copy._name;
 }
 
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
+{
+	if (this != &other)
+	{
+		AForm::operator=(other);
+		_name = other._name;
+	}
+	return (*this);
+}
 
+void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
+{
+	if (this->getSigned())
+	{
+		if (executor.getGrade() <= this->getGradeExecute())
+		{
+			srand(time(NULL));
+			int	num = rand();
+			std::cout << "drilling noises " << std::endl;
+			if (num < RAND_MAX / 2)
+				std::cout << _name << " has been robotomized successfully" << std::endl;
+			else
+				std::cout << "robotomy failed on " << _name << std::endl;
+		}
+		else
+		{
+			throw AForm::GradeTooLowException();
+			return ;
+		}
+	}
+	else
+		throw AForm::FormNotSigned();
+}
 
 RobotomyRequestForm::~RobotomyRequestForm(){}

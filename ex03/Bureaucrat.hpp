@@ -30,14 +30,6 @@ class Bureaucrat
 					return ("Grade too low");
 				}
 		};
-		class NotSignedException: public std::exception
-		{
-			public:
-				const char* what() const throw()
-				{
-					return ("it's not signed");
-				}
-		};
 		Bureaucrat(std::string name, int grade);
 		void	executeForm(AForm const & form);
 
@@ -45,7 +37,7 @@ class Bureaucrat
 		int			getGrade() const;
 		void		incGrade(int num);
 		void		decGrade(int num);
-		void	signForm(AForm& e);
+		void		signForm(AForm& e);
 		~Bureaucrat();
 };
 

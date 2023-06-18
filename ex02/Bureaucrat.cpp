@@ -45,7 +45,7 @@ void	Bureaucrat::decGrade(int num)
 {
 	try
 	{
-		if (_grade + num > 150)
+		if ((_grade + num) > 150)
 			throw Bureaucrat::GradeTooLowException();
 		else
 			_grade += num;
@@ -80,24 +80,14 @@ void	Bureaucrat::executeForm(AForm const & boh)
 {
 	try
 	{
-		if (boh.getSigned())
-		{
-			if (_grade <= boh.getGradeExecute())
-				std::cout << _name << " executed " << boh.getName() << std::endl;
-			else
-				throw Bureaucrat::GradeTooLowException();
-		}
-		else
-			throw Bureaucrat::NotSignedException();
+		boh.execute(*this);
 	}
-	catch (Bureaucrat::GradeTooLowException& e)
+	catch (AForm::GradeTooLowException& e)
 	{
 		std::cout << _name << " couldn't execute " << boh.getName() << " because " << e.what() << std::endl;
+		return ;
 	}
-	catch (Bureaucrat::NotSignedException& e)
-	{
-		std::cout << _name << " couldn't execute " << boh.getName() << " because " << e.what() << std::endl;
-	}
+	std::cout << _name << " execute " << boh.getName() << std::endl;
 }
 
 
