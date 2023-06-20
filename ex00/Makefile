@@ -1,14 +1,14 @@
 CC = c++ -Wall -Wextra -Werror -std=c++98
 CFILES = main.cpp Bureaucrat.cpp
-MAIN = Bureaucrat
+NAME = bureaucrat
 
-all: $(MAIN)
+all: $(NAME)
 
-$(MAIN):
-	$(CC) -g $(CFILES) Bureaucrat.hpp -o $(MAIN)
+$(NAME):
+	$(CC) -g $(CFILES) -o $(NAME)
 
 clean:
-	rm $(MAIN)
+	rm $(NAME)
 
 fclean: clean
 

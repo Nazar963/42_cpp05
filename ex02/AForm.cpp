@@ -9,11 +9,7 @@ AForm::AForm(std::string name, int gradeSign, int gradeExecute) : _name(name), _
 		else if (gradeSign > 150 || gradeExecute > 150)
 			throw AForm::GradeTooLowException();
 	}
-	catch (AForm::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (AForm::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -40,19 +36,12 @@ int	AForm::getGradeExecute() const { return (_gradeExecute); }
 
 void	AForm::beSigned(Bureaucrat& b)
 {
-	try
+	if (b.getGrade() <= _gradeSign)
+		_isSigned = true;
+	else if (b.getGrade() > _gradeSign)
 	{
-		if (b.getGrade() <= _gradeSign)
-			_isSigned = true;
-		else if (b.getGrade() > _gradeSign)
-		{
-			_isSigned = false;
-			throw AForm::GradeTooLowException();
-		}
-	}
-	catch (AForm::GradeTooLowException& e)
-	{
-		std::cout << e.what() << std::endl;
+		_isSigned = false;
+		throw AForm::GradeTooLowException();
 	}
 }
 
@@ -63,6 +52,6 @@ std::ostream& operator<<(std::ostream& os, const AForm& f)
 	os << "name of the form is " << f.getName() << std::endl;
 	os << "grade required to be signed " << f.getGradeSigned() << std::endl;
 	os << "grade required to be executed " << f.getGradeExecute() << std::endl;
-	os << "status of the form " << f.getSigned() << std::endl;
+	os << "status of the form " << f.getSigned();
 	return (os);
 }

@@ -11,11 +11,7 @@ Form::Form(std::string name, int gradeSign, int gradeExecute) : _name(name), _gr
 		else if (gradeSign > 150 || gradeExecute > 150)
 			throw Form::GradeTooLowException();
 	}
-	catch (Form::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (Form::GradeTooLowException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -47,6 +43,6 @@ std::ostream& operator<<(std::ostream& os, const Form& f)
 	os << "name of the form is " << f.getName() << std::endl;
 	os << "grade required to be signed " << f.getGradeSigned() << std::endl;
 	os << "grade required to be executed " << f.getGradeExecute() << std::endl;
-	os << "status of the form " << f.getSigned() << std::endl;
+	os << "status of the form " << f.getSigned();
 	return (os);
 }
