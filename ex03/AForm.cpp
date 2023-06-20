@@ -52,6 +52,6 @@ std::ostream& operator<<(std::ostream& os, const AForm& f)
 	os << "name of the form is " << f.getName() << std::endl;
 	os << "grade required to be signed " << f.getGradeSigned() << std::endl;
 	os << "grade required to be executed " << f.getGradeExecute() << std::endl;
-	os << "status of the form " << f.getSigned() << std::endl;
+	os << "status of the form " << f.getSigned();
 	return (os);
 }
